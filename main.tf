@@ -19,6 +19,13 @@ terraform {
     }
 }
 
+variable "IMAGEBUILDID" {
+  type        = string
+  default     = ""
+  description = "Latest Image Build ID"
+}
+
+
 provider "azurerm" {
   features {}
 }
@@ -39,7 +46,7 @@ resource "azurerm_container_group" "tf_acg" {
 
     container {
         name            = "weatherapi"
-        image           = "reggiemac/weatherapi"
+        image           = "reggiemac/weatherapi:${var.IMAGEBUILDID}"
         cpu             = 1
         memory          = 1
 
